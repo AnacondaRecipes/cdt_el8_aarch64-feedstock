@@ -1,0 +1,49 @@
+package:
+  name: audit-libs-el8-aarch64
+  version: 3.0.7
+
+source:
+  - url: https://download.rockylinux.org/vault/rocky/8.9/BaseOS/aarch64/os/Packages/a/audit-libs-3.0.7-5.el8.aarch64.rpm
+    sha256: fba8d166691c36c56b7eb475629a3c91c22b58663e55a0fcf944c93f26ba7083
+    no_hoist: true
+    folder: binary
+  # - url: https://download.rockylinux.org/vault/rocky/8.9/BaseOS/source/tree/Packages/a/audit-3.0.7-5.el8.src.rpm
+  #   no_hoist: true
+  #   folder: source
+
+build:
+  number: 0
+  noarch: generic
+  binary_relocation: false
+  detect_binary_files_with_prefix: false
+  ignore_run_exports:
+    - sysroot_linux-aarch64
+    - libcap-ng-el8-aarch64
+  missing_dso_whitelist:
+    - '*'
+
+requirements:
+  host:
+    - sysroot_linux-aarch64 2.28.*
+    - libcap-ng-el8-aarch64 >=0.7.11 *_0
+  run:
+    - sysroot_linux-aarch64 2.28.*
+    - libcap-ng-el8-aarch64 >=0.7.11 *_0
+
+test:
+  commands:
+    - echo "it installs!"
+
+about:
+  home: http://people.redhat.com/sgrubb/audit/
+  license: LGPL-2.0-or-later
+  license_family: LGPL
+#  license_file: audit-libs-copying.lib
+  summary: (CDT) Dynamic library for libaudit
+  description: |
+    The audit-libs package contains the dynamic libraries needed for applications
+    to use the audit framework.
+extra:
+  recipe-maintainers:
+    - conda-forge/help-cdts
+

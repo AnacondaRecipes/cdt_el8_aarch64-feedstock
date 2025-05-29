@@ -1,0 +1,60 @@
+package:
+  name: java-1.8.0-openjdk-el8-aarch64
+  version: 1.8.0.412
+
+source:
+  - url: https://raw.repo.almalinux.org/vault/8.9/AppStream/aarch64/os/Packages/java-1.8.0-openjdk-1.8.0.412.b08-2.el8.aarch64.rpm
+    sha256: 7250f4578c9b5060c199ea6ebc529a94bbb4781cb0b5dc2553bff25af85e8343
+    no_hoist: true
+    folder: binary
+
+build:
+  number: 0
+  noarch: generic
+  ignore_run_exports:
+    - libjpeg-turbo
+  missing_dso_whitelist:
+    - '*'
+
+requirements:
+  build:
+    - copy-jdk-configs-el8-aarch64 >=4.0
+    - javapackages-filesystem-el8-aarch64 >=5.3.0
+    - libjpeg-turbo
+    - ca-certificates
+    - alsa-lib
+    - xorg-libx11
+    - xorg-libxext
+    - xorg-libxi
+    - xorg-libxrender
+    - xorg-libxtst
+  host:
+    - copy-jdk-configs-el8-aarch64 >=4.0
+    - javapackages-filesystem-el8-aarch64 >=5.3.0
+    - libjpeg-turbo
+    - ca-certificates
+    - alsa-lib
+    - xorg-libx11
+    - xorg-libxext
+    - xorg-libxi
+    - xorg-libxrender
+    - xorg-libxtst
+  run:
+    - copy-jdk-configs-el8-aarch64 >=4.0
+    - javapackages-filesystem-el8-aarch64 >=5.3.0
+    - libjpeg-turbo
+    - ca-certificates
+    - alsa-lib
+    - xorg-libx11
+    - xorg-libxext
+    - xorg-libxi
+    - xorg-libxrender
+    - xorg-libxtst
+
+about:
+  home: http://openjdk.java.net/
+  license: ASL 1.1 and ASL 2.0 and BSD and BSD with advertising and GPL+ and GPLv2 and GPLv2 with exceptions and IJG and LGPLv2+ and MIT and MPLv1.1 and MPLv2.0 and Public Domain and W3C and zlib
+  license_family: GPL2
+  summary: "(CDT) OpenJDK Runtime Environment"
+  description: |
+        The OpenJDK runtime environment.

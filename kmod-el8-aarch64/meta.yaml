@@ -1,0 +1,48 @@
+package:
+  name: kmod-el8-aarch64
+  version: 25
+
+source:
+  - url: https://download.rockylinux.org/vault/rocky/8.9/BaseOS/aarch64/os/Packages/k/kmod-25-19.el8.aarch64.rpm
+    sha256: 1ab1a56ffda4f0b37e0913237283fcdaeadc06c2454a404e91cde90eff825eb4
+    no_hoist: true
+    folder: binary
+  # - url: https://download.rockylinux.org/vault/rocky/8.9/BaseOS/source/tree/Packages/k/kmod-25-19.el8.src.rpm
+  #   no_hoist: true
+  #   folder: source
+
+build:
+  number: 0
+  noarch: generic
+  binary_relocation: false
+  detect_binary_files_with_prefix: false
+  ignore_run_exports:
+    - sysroot_linux-aarch64
+  missing_dso_whitelist:
+    - '*'
+
+requirements:
+  host:
+    - sysroot_linux-aarch64 2.28.*
+  run:
+    - sysroot_linux-aarch64 2.28.*
+
+test:
+  commands:
+    - echo "it installs!"
+
+about:
+  home: http://git.kernel.org/?p=utils/kernel/kmod/kmod.git;a=summary
+  license: GPL-2.0-or-later
+  license_family: GPL2
+#  license_file: kmod-copying
+  summary: (CDT) Linux kernel module management utilities
+  description: |
+    The kmod package provides various programs needed for automatic loading and
+    unloading of modules under 2.6, 3.x, and later kernels, as well as other
+    module management programs. Device drivers and filesystems are two examples of
+    loaded and unloaded modules.
+extra:
+  recipe-maintainers:
+    - conda-forge/help-cdts
+

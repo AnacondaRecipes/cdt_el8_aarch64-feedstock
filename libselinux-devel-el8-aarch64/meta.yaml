@@ -1,0 +1,50 @@
+package:
+  name: libselinux-devel-el8-aarch64
+  version: 2.9
+
+source:
+  - url: https://download.rockylinux.org/vault/rocky/8.9/BaseOS/aarch64/os/Packages/l/libselinux-devel-2.9-8.el8.aarch64.rpm
+    sha256: 9486b9e7b06e2d7025974725ecfe9631eb5e51fc16535593beacd1672b4df9da
+    no_hoist: true
+    folder: binary
+  # - url: https://download.rockylinux.org/vault/rocky/8.9/BaseOS/source/tree/Packages/l/libselinux-2.9-8.el8.src.rpm
+  #   no_hoist: true
+  #   folder: source
+
+build:
+  number: 0
+  noarch: generic
+  binary_relocation: false
+  detect_binary_files_with_prefix: false
+  missing_dso_whitelist:
+    - '*'
+
+requirements:
+  build:
+    - libselinux-el8-aarch64 ==2.9 *_0
+    - libsepol-devel-el8-aarch64 >=2.9 *_0
+  host:
+    - libselinux-el8-aarch64 ==2.9 *_0
+    - libsepol-devel-el8-aarch64 >=2.9 *_0
+    - sysroot_linux-aarch64 2.28.*
+  run:
+    - libselinux-el8-aarch64 ==2.9 *_0
+    - libsepol-devel-el8-aarch64 >=2.9 *_0
+    - sysroot_linux-aarch64 2.28.*
+
+test:
+  commands:
+    - echo "it installs!"
+
+about:
+  home: https://github.com/SELinuxProject/selinux/wiki
+  license: Public-Domain
+  license_family: Public-Domain
+  summary: (CDT) Header files and libraries used to build SELinux
+  description: |
+    The libselinux-devel package contains the libraries and header files needed
+    for developing SELinux applications.
+extra:
+  recipe-maintainers:
+    - conda-forge/help-cdts
+
