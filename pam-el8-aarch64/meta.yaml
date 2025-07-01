@@ -17,36 +17,25 @@ build:
   noarch: generic
   binary_relocation: false
   detect_binary_files_with_prefix: false
-  ignore_run_exports:
-    - audit-libs-el8-aarch64
-    - libpwquality-el8-aarch64
-    - libselinux-el8-aarch64
-    - libxcrypt-el8-aarch64
-    - sysroot_linux-aarch64
   missing_dso_whitelist:
     - '*'
 
 requirements:
   build:
-    - audit-libs-el8-aarch64 >=1.0.8 *_0
-    - libpwquality-el8-aarch64 >=0.9.9 *_0
-    - libselinux-el8-aarch64 >=1.33.2 *_0
-    - libxcrypt-el8-aarch64 >=4.1.1 *_0
+    - sysroot_linux-aarch64 2.28.*
   host:
-    - audit-libs-el8-aarch64 >=1.0.8 *_0
-    - libpwquality-el8-aarch64 >=0.9.9 *_0
-    - libselinux-el8-aarch64 >=1.33.2 *_0
-    - libxcrypt-el8-aarch64 >=4.1.1 *_0
-    - sysroot_linux-aarch64 2.28.*
   run:
+    - sysroot_linux-aarch64 2.28.*
     - audit-libs-el8-aarch64 >=1.0.8 *_0
     - libpwquality-el8-aarch64 >=0.9.9 *_0
     - libselinux-el8-aarch64 >=1.33.2 *_0
+    - libtirpc-el8-aarch64 >=1.1.4 *_0
     - libxcrypt-el8-aarch64 >=4.1.1 *_0
-    - sysroot_linux-aarch64 2.28.*
+
 test:
   commands:
-    - echo "it installs!"
+    - test -f ${PREFIX}/aarch64-conda_el8-linux-gnu/sysroot/usr/lib64/libpam.so.0
+    - test -f ${PREFIX}/aarch64-conda_el8-linux-gnu/sysroot/usr/lib64/libpam.so.0.84.2
 
 about:
   home: http://www.linux-pam.org/
@@ -61,4 +50,3 @@ about:
 extra:
   recipe-maintainers:
     - conda-forge/help-cdts
-

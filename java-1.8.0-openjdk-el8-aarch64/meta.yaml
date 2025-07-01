@@ -12,27 +12,15 @@ build:
   skip: True  # [not (linux and aarch64)]
   number: 0
   noarch: generic
-  ignore_run_exports:
-    - libjpeg-turbo
   missing_dso_whitelist:
     - '*'
 
 requirements:
   build:
-    - copy-jdk-configs-el8-aarch64 >=4.0
-    - javapackages-filesystem-el8-aarch64 >=5.3.0
-    - libjpeg-turbo
-    - ca-certificates
-    - alsa-lib
-    - xorg-libx11
-    - xorg-libxext
-    - xorg-libxi
-    - xorg-libxrender
-    - xorg-libxtst
+    - sysroot_linux-aarch64 2.28.*
   host:
     - copy-jdk-configs-el8-aarch64 >=4.0
     - javapackages-filesystem-el8-aarch64 >=5.3.0
-    - libjpeg-turbo
     - ca-certificates
     - alsa-lib
     - xorg-libx11
@@ -41,9 +29,9 @@ requirements:
     - xorg-libxrender
     - xorg-libxtst
   run:
+    - sysroot_linux-aarch64 2.28.*
     - copy-jdk-configs-el8-aarch64 >=4.0
     - javapackages-filesystem-el8-aarch64 >=5.3.0
-    - libjpeg-turbo
     - ca-certificates
     - alsa-lib
     - xorg-libx11
@@ -51,6 +39,10 @@ requirements:
     - xorg-libxi
     - xorg-libxrender
     - xorg-libxtst
+
+test:
+  commands:
+    - test -f ${PREFIX}/aarch64-conda_el8-linux-gnu/sysroot/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.412.b08-2.el8.aarch64/jre/lib/aarch64/libjawt.so
 
 about:
   home: http://openjdk.java.net/
