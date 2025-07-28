@@ -1,0 +1,42 @@
+{% set version = "1.8.0.412" %}
+
+package:
+  name: java-1.8.0-openjdk-devel-el8-aarch64
+  version: {{ version }}
+
+source:
+  - url: https://raw.repo.almalinux.org/vault/8.9/AppStream/aarch64/os/Packages/java-1.8.0-openjdk-devel-{{ version }}.b08-2.el8.aarch64.rpm
+    sha256: 4bd01d61d7bb297d3b9f5d9516e8b6a15630aada1250d42110f0f0d038e63b44
+    no_hoist: true
+    folder: binary
+
+build:
+  skip: True  # [not (linux and aarch64)]
+  number: 0
+  noarch: generic
+  missing_dso_whitelist:
+    - '*'
+
+requirements:
+  build:
+    - sysroot_linux-aarch64 2.28.*
+  host:
+  run:
+    - sysroot_linux-aarch64 2.28.*
+    - java-1.8.0-openjdk-el8-aarch64 =={{ version }} *_0
+
+test:
+  commands:
+    - test -f ${PREFIX}/aarch64-conda_el8-linux-gnu/sysroot/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.412.b08-2.el8.aarch64/lib/tools.jar
+    - test -f ${PREFIX}/aarch64-conda-linux-gnu/sysroot/usr/share/systemtap/tapset/arm64/hotspot-1.8.0.412.b08-2.el8.aarch64.stp
+
+about:
+  home: http://openjdk.java.net/
+  # The nominal license is https://github.com/openjdk/jdk/blob/master/LICENSE
+  license: ASL 1.1 and ASL 2.0 and BSD and BSD with advertising and GPL+ and GPLv2 and GPLv2 with exceptions and IJG and LGPLv2+ and MIT and MPLv2.0 and Public Domain and W3C and zlib
+  license_family: GPL2
+  license_file:
+    - LICENSE
+  summary: "(CDT) OpenJDK Development Environment"
+  description: |
+        The OpenJDK development tools.

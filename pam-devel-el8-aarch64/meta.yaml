@@ -1,0 +1,52 @@
+package:
+  name: pam-devel-el8-aarch64
+  version: 1.3.1
+
+source:
+  - url: https://download.rockylinux.org/vault/rocky/8.9/BaseOS/aarch64/os/Packages/p/pam-devel-1.3.1-27.el8.aarch64.rpm
+    sha256: b169df2fade7b8714c21a7e19e10c63b010196e08e99c4746acec9a72cb2f5c0
+    no_hoist: true
+    folder: binary
+  # - url: https://download.rockylinux.org/vault/rocky/8.9/BaseOS/source/tree/Packages/p/pam-1.3.1-27.el8.src.rpm
+  #   no_hoist: true
+  #   folder: source
+
+build:
+  skip: True  # [not (linux and aarch64)]
+  number: 0
+  noarch: generic
+  binary_relocation: false
+  detect_binary_files_with_prefix: false
+
+requirements:
+  host:
+  run:
+    - pam-el8-aarch64 ==1.3.1 *_0
+    - audit-libs-devel-el8-aarch64 >=1.0.8 *_0
+    - libpwquality-devel-el8-aarch64 >=0.9.9 *_0
+    - libselinux-devel-el8-aarch64 >=1.33.2 *_0
+    - libtirpc-devel-el8-aarch64 >=1.1.4 *_0
+    - libxcrypt-devel-el8-aarch64 >=4.1.1 *_0
+
+test:
+  commands:
+    - test -f ${PREFIX}/aarch64-conda_el8-linux-gnu/sysroot/usr/include/security/pam_client.h
+    - test -f ${PREFIX}/aarch64-conda_el8-linux-gnu/sysroot/usr/lib64/libpam.so
+
+about:
+  home: http://www.linux-pam.org/
+  license: BSD-3-Clause or GPL-2.0-only  # BSD and GPLv2+
+  license_family: GPL2
+  license_file:
+    - gpl-2.0.txt
+    - Copyright
+  summary: "(CDT) Files needed for developing PAM-aware applications and modules for PAM"
+  description: |
+        PAM (Pluggable Authentication Modules) is a system security tool that allows
+        system administrators to set authentication policy without having to recompile
+        programs that handle authentication. This package contains header files used
+        for building both PAM-aware applications and modules for use with the PAM
+        system.
+extra:
+  recipe-maintainers:
+    - conda-forge/help-cdts

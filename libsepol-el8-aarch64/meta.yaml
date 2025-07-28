@@ -1,0 +1,56 @@
+package:
+  name: libsepol-el8-aarch64
+  version: 2.9
+
+source:
+  - url: https://download.rockylinux.org/vault/rocky/8.9/BaseOS/aarch64/os/Packages/l/libsepol-2.9-3.el8.aarch64.rpm
+    sha256: e2c55fc5738b9129c59a4fb29fd81be32ee242380398dc007f88ef19429cb747
+    no_hoist: true
+    folder: binary
+  # - url: https://download.rockylinux.org/vault/rocky/8.9/BaseOS/source/tree/Packages/l/libsepol-2.9-3.el8.src.rpm
+  #   no_hoist: true
+  #   folder: source
+
+build:
+  skip: True  # [not (linux and aarch64)]
+  number: 0
+  noarch: generic
+  binary_relocation: false
+  detect_binary_files_with_prefix: false
+  missing_dso_whitelist:
+    - '*'
+
+requirements:
+  build:
+    - sysroot_linux-aarch64 2.28.*
+  host:
+  run:
+    - sysroot_linux-aarch64 2.28.*
+
+test:
+  commands:
+    - test -f ${PREFIX}/aarch64-conda_el8-linux-gnu/sysroot/usr/lib64/libsepol.so.1
+
+about:
+  home: https://github.com/SELinuxProject/selinux/wiki
+  license: LGPL-2.1-only  # LGPLv2+
+  license_family: LGPL
+  license_file:
+    - COPYING
+  summary: (CDT) SELinux binary policy manipulation library
+  description: |
+    Security-enhanced Linux is a feature of the Linux® kernel and a number of
+    utilities with enhanced security functionality designed to add mandatory
+    access controls to Linux.  The Security-enhanced Linux kernel contains new
+    architectural components originally developed to improve the security of the
+    Flask operating system. These architectural components provide general support
+    for the enforcement of many kinds of mandatory access control policies,
+    including those based on the concepts of Type Enforcement®, Role-based Access
+    Control, and Multi-level Security.  libsepol provides an API for the
+    manipulation of SELinux binary policies. It is used by checkpolicy (the policy
+    compiler) and similar tools, as well as by programs like load_policy that need
+    to perform specific transformations on binary policies such as customizing
+    policy boolean settings.
+extra:
+  recipe-maintainers:
+    - conda-forge/help-cdts

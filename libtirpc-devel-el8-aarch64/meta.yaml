@@ -1,0 +1,48 @@
+package:
+  name: libtirpc-devel-el8-aarch64
+  version: 1.1.4
+
+source:
+  - url: https://download.rockylinux.org/vault/rocky/8.9/BaseOS/aarch64/os/Packages/l/libtirpc-devel-1.1.4-8.el8.aarch64.rpm
+    sha256: d725a2718b36630d1330db9e93b8224b48ace5d140f983c0395ed8da49b9e0bf
+    no_hoist: true
+    folder: binary
+  # - url: https://download.rockylinux.org/vault/rocky/8.9/BaseOS/source/tree/Packages/l/libtirpc-1.1.4-8.el8.src.rpm
+  #   no_hoist: true
+  #   folder: source
+
+build:
+  skip: True  # [not (linux and aarch64)]
+  number: 0
+  noarch: generic
+  binary_relocation: false
+  detect_binary_files_with_prefix: false
+
+requirements:
+  host:
+  run:
+    - sysroot_linux-aarch64 2.28.*
+    - libtirpc-el8-aarch64 ==1.1.4 *_0
+
+test:
+  requires:
+    - pkg-config
+  commands:
+    - test -f ${PREFIX}/aarch64-conda_el8-linux-gnu/sysroot/usr/include/tirpc/netconfig.h
+    - test -f ${PREFIX}/aarch64-conda_el8-linux-gnu/sysroot/lib64/libtirpc.so
+    - export PKG_CONFIG_PATH=${PREFIX}/aarch64-conda_el8-linux-gnu/sysroot/usr/lib64/pkgconfig
+    - pkg-config --cflags libtirpc
+
+about:
+  home: http://git.linux-nfs.org/?p=steved/libtirpc.git;a=summary
+  license: BSD-3-Clause  # SISSL and BSD
+  license_family: BSD
+  license_file:
+    - COPYING
+  summary: (CDT) Development files for the libtirpc library
+  description: |
+    This package includes header files and libraries necessary for
+    developing programs which use the tirpc library.
+extra:
+  recipe-maintainers:
+    - conda-forge/help-cdts
